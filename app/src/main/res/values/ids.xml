@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="tag_project">project</item>
+    <item type="id" name="tag_username">username</item>
+    <item type="id" name="tag_build_number">build_number</item>
+</resources>

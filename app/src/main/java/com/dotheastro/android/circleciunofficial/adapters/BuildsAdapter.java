@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import com.dotheastro.android.circleciunofficial.R;
 import com.dotheastro.android.circleciunofficial.models.Build;
+import com.dotheastro.android.circleciunofficial.models.bus.BusProvider;
+import com.dotheastro.android.circleciunofficial.models.bus.RetryBuildEvent;
+import com.squareup.otto.Bus;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
@@ -21,6 +24,23 @@ import java.util.List;
 public class BuildsAdapter extends ArrayAdapter<Build> {
 
     final static PrettyTime prettyTime = new PrettyTime();
+    private Bus bus;
+
+    private Bus getBus() {
+        if (bus == null) {
+            bus = BusProvider.getInstance();
+        }
+        return bus;
+    }
+
+    private Button.OnClickListener retryBuildListener(final String project, final String username, final int buildNumber) {
+        return new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getBus().post(new RetryBuildEvent(project, username, buildNumber));
+            }
+        };
+    }
 
     static class ViewHolder {
         public TextView repoName;
@@ -85,6 +105,7 @@ public class BuildsAdapter extends ArrayAdapter<Build> {
                 Long.toString(build.build_time_millis)));
 
         viewHolder.status.setText(build.status);
+        viewHolder.retry.setOnClickListener(retryBuildListener(build.reponame, build.username, build.build_num));
 
         return convertView;
     }

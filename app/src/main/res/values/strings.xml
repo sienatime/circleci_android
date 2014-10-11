@@ -9,5 +9,6 @@
     <string name="unauthorized">Unauthorized. Did you set your API token correctly?</string>
     <string name="circle_api_token">Circle API Token</string>
     <string name="circle_api_token_summary">Create a token on circleci.com under Your Account -> Settings -> API Tokens</string>
+    <string name="retry_successful">Successfully retried build</string>
 
 </resources>

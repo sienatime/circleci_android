@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.dotheastro.android.circleciunofficial.R;
 import com.dotheastro.android.circleciunofficial.adapters.BuildsAdapter;
@@ -13,6 +14,7 @@ import com.dotheastro.android.circleciunofficial.models.Build;
 import com.dotheastro.android.circleciunofficial.models.bus.BuildsLoadedEvent;
 import com.dotheastro.android.circleciunofficial.models.bus.BusProvider;
 import com.dotheastro.android.circleciunofficial.models.bus.LoadBuildsEvent;
+import com.dotheastro.android.circleciunofficial.models.bus.RetrySuccessfulEvent;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
@@ -62,6 +64,11 @@ public class BuildsActivity extends Activity {
     public void updateViewWithBuilds(BuildsLoadedEvent event) {
         setBuilds(Arrays.asList(event.getBuilds()));
         setUpView();
+    }
+
+    @Subscribe
+    public void onSuccessfulRetry(RetrySuccessfulEvent event) {
+        Toast.makeText(this, getString(R.string.retry_successful), Toast.LENGTH_LONG).show();
     }
 
     public void setUpView() {

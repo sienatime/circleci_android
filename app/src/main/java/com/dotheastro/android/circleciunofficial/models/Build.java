@@ -15,4 +15,6 @@ public class Build {
     public String committer_name;
     public Date start_time;
     public long build_time_millis;
+    public String why;
+    public String username;
 }
