@@ -128,6 +128,8 @@ public class BuildsAdapter extends ArrayAdapter<Build> {
 
         if (build.status.equals("running")) {
             viewHolder.cancel.setVisibility(View.VISIBLE);
+        } else {
+            viewHolder.cancel.setVisibility(View.GONE);
         }
 
         viewHolder.retry.setOnClickListener(retryBuildListener(build.reponame, build.username, build.build_num));
