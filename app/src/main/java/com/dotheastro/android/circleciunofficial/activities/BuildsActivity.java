@@ -8,8 +8,8 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dotheastro.android.circleciunofficial.R;
@@ -32,7 +32,7 @@ public class BuildsActivity extends Activity {
     private List<Build> builds;
     private BuildsAdapter adapter;
     private Bus bus;
-    private TextView getStarted;
+    private LinearLayout getStarted;
     private ListView listView;
 
     public List<Build> getBuilds() {
@@ -98,11 +98,12 @@ public class BuildsActivity extends Activity {
     @Subscribe
     public void onApiError(ApiErrorEvent event) {
         adapter.clear();
+        getStarted.setVisibility(View.VISIBLE);
     }
 
     public void setUp() {
         // set list adapter
-        getStarted = (TextView)findViewById(R.id.get_started);
+        getStarted = (LinearLayout)findViewById(R.id.get_started);
         listView = (ListView)findViewById(R.id.builds_list);
         adapter = new BuildsAdapter(this, R.layout.partial_build);
         listView.setAdapter(adapter);
