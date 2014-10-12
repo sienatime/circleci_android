@@ -24,7 +24,7 @@ public class PreferencesActivity extends PreferenceActivity implements SharedPre
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        String accessToken = sharedPreferences.getString("circleAPIToken", "");
+        String accessToken = sharedPreferences.getString("circleAPIToken", null);
         Bus bus = CircleApp.getInstance().getBus();
 
         bus.post(new ApiTokenChangedEvent(accessToken));

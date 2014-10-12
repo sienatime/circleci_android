@@ -2,23 +2,28 @@ package com.dotheastro.android.circleciunofficial.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dotheastro.android.circleciunofficial.R;
 import com.dotheastro.android.circleciunofficial.adapters.BuildsAdapter;
 import com.dotheastro.android.circleciunofficial.models.Build;
+import com.dotheastro.android.circleciunofficial.models.bus.ApiErrorEvent;
 import com.dotheastro.android.circleciunofficial.models.bus.BuildsLoadedEvent;
 import com.dotheastro.android.circleciunofficial.models.bus.BusProvider;
+import com.dotheastro.android.circleciunofficial.models.bus.CancelBuildSuccessful;
 import com.dotheastro.android.circleciunofficial.models.bus.LoadBuildsEvent;
 import com.dotheastro.android.circleciunofficial.models.bus.RetrySuccessfulEvent;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -27,6 +32,8 @@ public class BuildsActivity extends Activity {
     private List<Build> builds;
     private BuildsAdapter adapter;
     private Bus bus;
+    private TextView getStarted;
+    private ListView listView;
 
     public List<Build> getBuilds() {
         return builds;
@@ -40,6 +47,7 @@ public class BuildsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_builds);
+        setUp();
     }
 
     @Override
@@ -51,7 +59,16 @@ public class BuildsActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        getBus().post(new LoadBuildsEvent());
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String apiToken = prefs.getString("circleAPIToken", null);
+        if ( apiToken == null || apiToken.equals("")) {
+            listView.setVisibility(View.GONE);
+            getStarted.setVisibility(View.VISIBLE);
+        } else {
+            getStarted.setVisibility(View.GONE);
+            listView.setVisibility(View.VISIBLE);
+            getBus().post(new LoadBuildsEvent());
+        }
     }
 
     @Override
@@ -62,19 +79,32 @@ public class BuildsActivity extends Activity {
 
     @Subscribe
     public void updateViewWithBuilds(BuildsLoadedEvent event) {
-        setBuilds(Arrays.asList(event.getBuilds()));
-        setUpView();
+        adapter.clear();
+        adapter.addAll(event.getBuilds());
     }
 
     @Subscribe
     public void onSuccessfulRetry(RetrySuccessfulEvent event) {
         Toast.makeText(this, getString(R.string.retry_successful), Toast.LENGTH_LONG).show();
+        getBus().post(new LoadBuildsEvent());
     }
 
-    public void setUpView() {
+    @Subscribe
+    public void onSuccessfulCancel(CancelBuildSuccessful event) {
+        Toast.makeText(this, getString(R.string.cancel_successful), Toast.LENGTH_LONG).show();
+        getBus().post(new LoadBuildsEvent());
+    }
+
+    @Subscribe
+    public void onApiError(ApiErrorEvent event) {
+        adapter.clear();
+    }
+
+    public void setUp() {
         // set list adapter
-        adapter = new BuildsAdapter(this, R.layout.partial_build, builds);
-        ListView listView = (ListView)findViewById(R.id.builds_list);
+        getStarted = (TextView)findViewById(R.id.get_started);
+        listView = (ListView)findViewById(R.id.builds_list);
+        adapter = new BuildsAdapter(this, R.layout.partial_build);
         listView.setAdapter(adapter);
     }
     @Override

@@ -6,6 +6,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.dotheastro.android.circleciunofficial.R;
 import com.dotheastro.android.circleciunofficial.models.bus.ApiErrorEvent;
 import com.dotheastro.android.circleciunofficial.models.bus.ApiTokenChangedEvent;
 import com.dotheastro.android.circleciunofficial.models.bus.BusProvider;
@@ -37,7 +38,12 @@ public class CircleApp extends Application {
 
     @Subscribe
     public void onApiError(ApiErrorEvent event) {
-        Toast.makeText(getApplicationContext(), event.getMessage(), Toast.LENGTH_LONG).show();
+        String message = event.getMessage();
+        if (event.getError().getMessage().equals("401 Unauthorized")) {
+            message = getString(R.string.unauthorized);
+        }
+
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
         Log.e("CircleCIUnofficial", event.getMessage());
         Thread.dumpStack();
     }

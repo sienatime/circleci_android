@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="running">#0096c8</color>
+    <color name="happy">#292</color>
+    <color name="failed">#c13737</color>
+    <color name="canceled">#898989</color>
+    <color name="not_run">#e95900</color>
+</resources>

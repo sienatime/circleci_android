@@ -19,4 +19,8 @@ public interface CircleAPI {
     @Headers("Accept: application/json")
     @POST("/api/v1/project/{username}/{project}/{buildNumber}/retry")
     void retryBuild(@Path("username") String username, @Path("project") String project, @Path("buildNumber") int buildNumber, Callback<Object> callback);
+
+    @Headers("Accept: application/json")
+    @POST("/api/v1/project/{username}/{project}/{buildNumber}/cancel")
+    void cancelBuild(@Path("username") String username, @Path("project") String project, @Path("buildNumber") int buildNumber, Callback<Object> callback);
 }

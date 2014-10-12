@@ -5,6 +5,8 @@ import android.util.Log;
 import com.dotheastro.android.circleciunofficial.interfaces.CircleAPI;
 import com.dotheastro.android.circleciunofficial.models.bus.ApiErrorEvent;
 import com.dotheastro.android.circleciunofficial.models.bus.BuildsLoadedEvent;
+import com.dotheastro.android.circleciunofficial.models.bus.CancelBuildEvent;
+import com.dotheastro.android.circleciunofficial.models.bus.CancelBuildSuccessful;
 import com.dotheastro.android.circleciunofficial.models.bus.LoadBuildsEvent;
 import com.dotheastro.android.circleciunofficial.models.bus.RetryBuildEvent;
 import com.dotheastro.android.circleciunofficial.models.bus.RetrySuccessfulEvent;
@@ -63,6 +65,22 @@ public class CircleService {
             public void success(Object object, Response response) {
                 Build build = gson.fromJson(gson.toJson(object), Build.class);
                 bus.post(new RetrySuccessfulEvent(build));
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                bus.post(new ApiErrorEvent(error));
+            }
+        });
+    }
+
+    @Subscribe
+    public void cancelBuild(CancelBuildEvent event) {
+        api.cancelBuild(event.getProject(), event.getUsername(), event.getBuildNumber(), new Callback<Object>() {
+            @Override
+            public void success(Object object, Response response) {
+                Build build = gson.fromJson(gson.toJson(object), Build.class);
+                bus.post(new CancelBuildSuccessful(build));
             }
 
             @Override
