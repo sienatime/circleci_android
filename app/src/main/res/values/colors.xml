@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="running">#0096c8</color>
-    <color name="happy">#292</color>
+    <color name="success">#292</color>
+    <color name="fixed">#292</color>
     <color name="failed">#c13737</color>
     <color name="canceled">#898989</color>
+    <color name="not_running">#898989</color>
+    <color name="queued">#898989</color>
     <color name="not_run">#e95900</color>
+    <color name="scheduled">#898989</color>
+    <color name="timedout">#c13737</color>
 </resources>

@@ -16,7 +16,8 @@
     <string name="api_error">API error: </string>
     <string name="unauthorized">Unauthorized. Did you set your API token correctly?</string>
     <string name="circle_api_token">Circle API Token</string>
-    <string name="circle_api_token_summary">Create a token on circleci.com under Your Account -> Settings -> API Tokens</string>
+    <string name="circle_api_token_summary">Tap here to set the token you created on circleci.com
+        under Your Account -> Settings -> API Tokens</string>
     <string name="retry_successful">Successfully retried build</string>
     <string name="cancel_successful">Successfully canceled build</string>
     <string name="failed">Failed</string>
@@ -24,5 +25,10 @@
     <string name="canceled">Canceled</string>
     <string name="success">Success</string>
     <string name="running">Running</string>
+    <string name="fixed">Fixed</string>
+    <string name="queued">Queued</string>
+    <string name="not_running">Not Running</string>
+    <string name="scheduled">Scheduled</string>
+    <string name="timedout">Timed Out</string>
 
 </resources>

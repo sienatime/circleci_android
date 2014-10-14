@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.dotheastro.android.circleciunofficial.R;
 import com.dotheastro.android.circleciunofficial.models.Build;
-import com.dotheastro.android.circleciunofficial.models.Dump;
 import com.dotheastro.android.circleciunofficial.models.bus.BusProvider;
 import com.dotheastro.android.circleciunofficial.models.bus.CancelBuildEvent;
 import com.dotheastro.android.circleciunofficial.models.bus.RetryBuildEvent;
@@ -21,7 +20,6 @@ import org.ocpsoft.prettytime.PrettyTime;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
 
 /**
  * Created by Siena on 9/6/2014.
@@ -31,8 +29,7 @@ public class BuildsAdapter extends ArrayAdapter<Build> {
     final static PrettyTime prettyTime = new PrettyTime();
     private Bus bus;
     private Resources res;
-    private HashMap<String, Integer> statusColorMap;
-    private HashMap<String, String> localizedStatusMap;
+    private String packageName;
 
     private Bus getBus() {
         if (bus == null) {
@@ -123,8 +120,21 @@ public class BuildsAdapter extends ArrayAdapter<Build> {
 
         viewHolder.length.setText(String.format(res.getString(R.string.duration), millisToString(build.build_time_millis)));
 
-        viewHolder.status.setText(localizedStatusMap.get(build.status));
-        viewHolder.status.setBackgroundColor(statusColorMap.get(build.status));
+        int statusStringId = res.getIdentifier(build.status, "string", packageName);
+
+        if (statusStringId != 0 ) {
+            viewHolder.status.setText(res.getString(statusStringId));
+        } else {
+            viewHolder.status.setText(build.status);
+        }
+
+        int statusColorId = res.getIdentifier(build.status, "color", packageName);
+
+        if (statusColorId != 0) {
+            viewHolder.status.setBackgroundColor(res.getColor(statusColorId));
+        } else {
+            viewHolder.status.setBackgroundColor(res.getColor(R.color.canceled));
+        }
 
         if (build.status.equals("running")) {
             viewHolder.cancel.setVisibility(View.VISIBLE);
@@ -141,8 +151,7 @@ public class BuildsAdapter extends ArrayAdapter<Build> {
     public BuildsAdapter(Context context, int resource) {
         super(context, resource);
         this.res = context.getResources();
-        this.statusColorMap = Dump.getStatusColorMap(this.res);
-        this.localizedStatusMap = Dump.getLocalizedStatusString(this.res);
+        this.packageName = context.getPackageName();
     }
 
     public String millisToString(long ms) {
