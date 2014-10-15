@@ -20,6 +20,8 @@ import org.ocpsoft.prettytime.PrettyTime;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by Siena on 9/6/2014.
@@ -113,7 +115,8 @@ public class BuildsAdapter extends ArrayAdapter<Build> {
         viewHolder.log.setText(build.subject);
 
         if (build.start_time != null) {
-            viewHolder.startedAt.setText(String.format(res.getString(R.string.started), prettyTime.format(build.start_time)));
+            Date localTime = new Date(build.start_time.getTime() + TimeZone.getDefault().getOffset(build.start_time.getTime()));
+            viewHolder.startedAt.setText(String.format(res.getString(R.string.started), prettyTime.format(localTime)));
         } else {
             viewHolder.startedAt.setText(R.string.not_started);
         }
