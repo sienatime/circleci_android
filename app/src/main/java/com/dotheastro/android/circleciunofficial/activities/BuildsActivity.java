@@ -56,12 +56,17 @@ public class BuildsActivity extends Activity {
         getBus().register(this);
     }
 
+    private boolean hasToken() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String apiToken = prefs.getString("circleAPIToken", null);
+        return apiToken == null || apiToken.equals("");
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String apiToken = prefs.getString("circleAPIToken", null);
-        if ( apiToken == null || apiToken.equals("")) {
+
+        if ( hasToken() ) {
             listView.setVisibility(View.GONE);
             getStarted.setVisibility(View.VISIBLE);
         } else {
@@ -124,7 +129,7 @@ public class BuildsActivity extends Activity {
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, PreferencesActivity.class));
             return true;
-        } else if (id == R.id.refresh) {
+        } else if (id == R.id.refresh && hasToken()) {
             getBus().post(new LoadBuildsEvent());
         }
         return super.onOptionsItemSelected(item);
