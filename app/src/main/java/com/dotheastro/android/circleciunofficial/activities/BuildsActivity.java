@@ -124,6 +124,8 @@ public class BuildsActivity extends Activity {
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, PreferencesActivity.class));
             return true;
+        } else if (id == R.id.refresh) {
+            getBus().post(new LoadBuildsEvent());
         }
         return super.onOptionsItemSelected(item);
     }

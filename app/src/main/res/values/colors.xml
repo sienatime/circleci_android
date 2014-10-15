@@ -10,4 +10,5 @@
     <color name="not_run">#e95900</color>
     <color name="scheduled">#898989</color>
     <color name="timedout">#c13737</color>
+    <color name="retried">#898989</color>
 </resources>

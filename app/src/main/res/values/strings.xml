@@ -30,5 +30,8 @@
     <string name="not_running">Not Running</string>
     <string name="scheduled">Scheduled</string>
     <string name="timedout">Timed Out</string>
+    <string name="retried">Retried</string>
+    <string name="refresh">Refresh</string>
+    <string name="refreshing">Refreshing...</string>
 
 </resources>

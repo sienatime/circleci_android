@@ -1,7 +1,10 @@
 package com.dotheastro.android.circleciunofficial.models;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.dotheastro.android.circleciunofficial.R;
 import com.dotheastro.android.circleciunofficial.interfaces.CircleAPI;
 import com.dotheastro.android.circleciunofficial.models.bus.ApiErrorEvent;
 import com.dotheastro.android.circleciunofficial.models.bus.BuildsLoadedEvent;
@@ -42,6 +45,8 @@ public class CircleService {
 
     @Subscribe
     public void getBuilds(LoadBuildsEvent event) {
+        Context context = CircleApp.getInstance().getApplicationContext();
+        Toast.makeText(context, context.getResources().getString(R.string.refreshing), Toast.LENGTH_LONG).show();
         api.listBuilds(new Callback<Object>() {
             @Override
             public void success(Object builds, Response response) {
