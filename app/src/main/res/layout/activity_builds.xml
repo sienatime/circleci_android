@@ -3,10 +3,11 @@
     <variable name="activity" type="net.emojiparty.android.circleciunofficial.activities.BuildsActivity" />
   </data>
 
-  <RelativeLayout
+  <LinearLayout
       xmlns:tools="http://schemas.android.com/tools"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:orientation="vertical"
       android:background="@color/background_gray"
       tools:context="net.emojiparty.android.circleciunofficial.activities.BuildsActivity">
 
@@ -50,5 +51,5 @@
         android:layout_height="wrap_content"
         android:id="@+id/builds_list"/>
 
-  </RelativeLayout>
+  </LinearLayout>
 </layout>
