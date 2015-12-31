@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context=".Builds">
+    tools:context="com.dotheastro.android.circleciunofficial.activities.BuildsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

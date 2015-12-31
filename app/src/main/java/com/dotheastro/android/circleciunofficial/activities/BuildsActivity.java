@@ -1,17 +1,16 @@
 package com.dotheastro.android.circleciunofficial.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import com.dotheastro.android.circleciunofficial.R;
 import com.dotheastro.android.circleciunofficial.adapters.BuildsAdapter;
 import com.dotheastro.android.circleciunofficial.models.Build;
@@ -23,11 +22,10 @@ import com.dotheastro.android.circleciunofficial.models.bus.LoadBuildsEvent;
 import com.dotheastro.android.circleciunofficial.models.bus.RetrySuccessfulEvent;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
-
 import java.util.List;
 
 
-public class BuildsActivity extends Activity {
+public class BuildsActivity extends AppCompatActivity {
 
     private List<Build> builds;
     private BuildsAdapter adapter;
