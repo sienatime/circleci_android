@@ -2,18 +2,18 @@ package com.dotheastro.android.circleciunofficial.adapters;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import com.dotheastro.android.circleciunofficial.BR;
 import com.dotheastro.android.circleciunofficial.R;
 import com.dotheastro.android.circleciunofficial.models.Build;
-import com.dotheastro.android.circleciunofficial.models.bus.BusProvider;
-import com.dotheastro.android.circleciunofficial.models.bus.CancelBuildEvent;
-import com.dotheastro.android.circleciunofficial.models.bus.RetryBuildEvent;
-import com.squareup.otto.Bus;
+import com.dotheastro.android.circleciunofficial.models.Handlers;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,7 +26,6 @@ import org.ocpsoft.prettytime.PrettyTime;
 public class BuildsAdapter extends RecyclerView.Adapter<BuildsAdapter.ViewHolder> {
 
   final static PrettyTime prettyTime = new PrettyTime();
-  private Bus bus;
   private Resources res;
   private String packageName;
   private Build[] builds;
@@ -43,16 +42,8 @@ public class BuildsAdapter extends RecyclerView.Adapter<BuildsAdapter.ViewHolder
 
   @Override public void onBindViewHolder(ViewHolder viewHolder, int position) {
     Build build = builds[position];
-
-    String buildTitle =
-        String.format(res.getString(R.string.build_title), build.reponame, build.branch,
-            Integer.toString(build.build_num));
-    viewHolder.buildTitle.setText(buildTitle);
-
-    String authorName = build.committer_name == null ? "" : build.committer_name;
-
-    viewHolder.author.setText(String.format(res.getString(R.string.author), authorName));
-    viewHolder.log.setText(build.subject);
+    viewHolder.binding.setVariable(BR.build, build);
+    viewHolder.binding.setVariable(BR.handlers, new Handlers());
 
     if (build.start_time != null) {
       Date localTime = new Date(
@@ -81,17 +72,6 @@ public class BuildsAdapter extends RecyclerView.Adapter<BuildsAdapter.ViewHolder
     } else {
       viewHolder.status.setBackgroundColor(res.getColor(R.color.canceled));
     }
-
-    if (build.status.equals("running")) {
-      viewHolder.cancel.setVisibility(View.VISIBLE);
-    } else {
-      viewHolder.cancel.setVisibility(View.GONE);
-    }
-
-    viewHolder.retry.setOnClickListener(
-        retryBuildListener(build.reponame, build.username, build.build_num));
-    viewHolder.cancel.setOnClickListener(
-        cancelBuildListener(build.reponame, build.username, build.build_num));
   }
 
   @Override public int getItemCount() {
@@ -105,54 +85,21 @@ public class BuildsAdapter extends RecyclerView.Adapter<BuildsAdapter.ViewHolder
     return viewHolder;
   }
 
-  private Bus getBus() {
-    if (bus == null) {
-      bus = BusProvider.getInstance();
-    }
-    return bus;
-  }
-
-  private Button.OnClickListener retryBuildListener(final String project, final String username,
-      final int buildNumber) {
-    return new Button.OnClickListener() {
-      @Override public void onClick(View view) {
-        view.setEnabled(false);
-        getBus().post(new RetryBuildEvent(project, username, buildNumber));
-      }
-    };
-  }
-
-  private Button.OnClickListener cancelBuildListener(final String project, final String username,
-      final int buildNumber) {
-    return new Button.OnClickListener() {
-      @Override public void onClick(View view) {
-        view.setEnabled(false);
-        getBus().post(new CancelBuildEvent(project, username, buildNumber));
-      }
-    };
-  }
-
   static class ViewHolder extends RecyclerView.ViewHolder {
-    public TextView buildTitle;
-    public TextView author;
-    public TextView log;
+    public ViewDataBinding binding;
+
     public TextView startedAt;
     public TextView length;
     public TextView status;
-    public Button retry;
-    public Button cancel;
 
-    public ViewHolder(View parentLayout) {
-      super(parentLayout);
+    public ViewHolder(View rowView) {
+      super(rowView);
 
-      buildTitle = (TextView) parentLayout.findViewById(R.id.build_title);
-      author = (TextView) parentLayout.findViewById(R.id.author);
-      log = (TextView) parentLayout.findViewById(R.id.log);
-      startedAt = (TextView) parentLayout.findViewById(R.id.started_at);
-      length = (TextView) parentLayout.findViewById(R.id.length);
-      status = (TextView) parentLayout.findViewById(R.id.status);
-      retry = (Button) parentLayout.findViewById(R.id.retry);
-      cancel = (Button) parentLayout.findViewById(R.id.cancel);
+      binding = DataBindingUtil.bind(rowView);
+
+      startedAt = (TextView) rowView.findViewById(R.id.started_at);
+      length = (TextView) rowView.findViewById(R.id.length);
+      status = (TextView) rowView.findViewById(R.id.status);
     }
   }
 
