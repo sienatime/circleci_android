@@ -5,11 +5,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Toast;
 import com.dotheastro.android.circleciunofficial.R;
 import com.dotheastro.android.circleciunofficial.adapters.BuildsAdapter;
@@ -31,7 +32,7 @@ public class BuildsActivity extends AppCompatActivity {
     private BuildsAdapter adapter;
     private Bus bus;
     private LinearLayout getStarted;
-    private ListView listView;
+    private RecyclerView recyclerView;
 
     public List<Build> getBuilds() {
         return builds;
@@ -65,11 +66,11 @@ public class BuildsActivity extends AppCompatActivity {
         super.onResume();
 
         if ( tokenIsEmpty() ) {
-            listView.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.GONE);
             getStarted.setVisibility(View.VISIBLE);
         } else {
             getStarted.setVisibility(View.GONE);
-            listView.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.VISIBLE);
             getBus().post(new LoadBuildsEvent());
         }
     }
@@ -82,8 +83,8 @@ public class BuildsActivity extends AppCompatActivity {
 
     @Subscribe
     public void updateViewWithBuilds(BuildsLoadedEvent event) {
-        adapter.clear();
-        adapter.addAll(event.getBuilds());
+        adapter.setBuilds(event.getBuilds());
+        adapter.notifyDataSetChanged();
     }
 
     @Subscribe
@@ -100,16 +101,18 @@ public class BuildsActivity extends AppCompatActivity {
 
     @Subscribe
     public void onApiError(ApiErrorEvent event) {
-        adapter.clear();
         getStarted.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
     }
 
     public void setUp() {
         // set list adapter
         getStarted = (LinearLayout)findViewById(R.id.get_started);
-        listView = (ListView)findViewById(R.id.builds_list);
-        adapter = new BuildsAdapter(this, R.layout.partial_build);
-        listView.setAdapter(adapter);
+        recyclerView = (RecyclerView) findViewById(R.id.builds_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        adapter = new BuildsAdapter(this, new Build[0]);
+        recyclerView.setAdapter(adapter);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
