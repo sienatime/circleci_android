@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="running">#0096c8</color>
-    <color name="success">#292</color>
-    <color name="fixed">#292</color>
-    <color name="failed">#c13737</color>
-    <color name="canceled">#898989</color>
-    <color name="not_running">#898989</color>
-    <color name="queued">#898989</color>
-    <color name="not_run">#e95900</color>
-    <color name="scheduled">#898989</color>
-    <color name="timedout">#c13737</color>
-    <color name="retried">#898989</color>
+    <color name="running">#66d3e4</color>
+    <color name="success">#42c88a</color>
+    <color name="fixed">#42c88a</color>
+    <color name="failed">#ed5c5c</color>
+    <color name="canceled">#999999</color>
+    <color name="not_running">#999999</color>
+    <color name="queued">#999999</color>
+    <color name="not_run">#999999</color>
+    <color name="scheduled">#999999</color>
+    <color name="timedout">#ed5c5c</color>
+    <color name="retried">#999999</color>
 
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#004b64</color>
+    <color name="colorPrimaryDark">#023C50</color>
+    <color name="colorAccent">#27a0b6</color>
 
 </resources>
