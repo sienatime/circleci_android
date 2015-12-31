@@ -3,6 +3,7 @@ package com.dotheastro.android.circleciunofficial.activities;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import com.dotheastro.android.circleciunofficial.R;
 import com.dotheastro.android.circleciunofficial.models.CircleApp;
@@ -19,7 +20,9 @@ public class PreferencesActivity extends PreferenceActivity
     super.onCreate(savedInstanceState);
     PreferenceManager.getDefaultSharedPreferences(this)
         .registerOnSharedPreferenceChangeListener(this);
-    addPreferencesFromResource(R.xml.prefs);
+    getFragmentManager().beginTransaction()
+        .replace(android.R.id.content, new PrefsFragment())
+        .commit();
   }
 
   @Override public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
@@ -27,5 +30,13 @@ public class PreferencesActivity extends PreferenceActivity
     Bus bus = CircleApp.getInstance().getBus();
 
     bus.post(new ApiTokenChangedEvent(accessToken));
+  }
+
+  public static class PrefsFragment extends PreferenceFragment {
+    @Override public void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+
+      addPreferencesFromResource(R.xml.prefs);
+    }
   }
 }
