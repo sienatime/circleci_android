@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/length"
-        android:text="@{@string/author(build.committer_name)}"
+        android:text='@{build.committer_name != null ? @string/author(build.committer_name) : ""}'
         android:id="@+id/author"/>
 
     <TextView

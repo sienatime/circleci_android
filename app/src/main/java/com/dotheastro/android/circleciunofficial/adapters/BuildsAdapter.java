@@ -83,7 +83,7 @@ public class BuildsAdapter extends RecyclerView.Adapter<BuildsAdapter.ViewHolder
 
   @Override public BuildsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     View parentLayout =
-        LayoutInflater.from(parent.getContext()).inflate(R.layout.partial_build, parent, false);
+        LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_build, parent, false);
     ViewHolder viewHolder = new ViewHolder(parentLayout);
     return viewHolder;
   }
