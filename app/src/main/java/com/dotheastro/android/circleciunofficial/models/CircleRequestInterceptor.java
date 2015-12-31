@@ -13,7 +13,6 @@ public class CircleRequestInterceptor implements retrofit.RequestInterceptor {
     @Override
     public void intercept(RequestFacade request) {
         // put API token into every request
-        // TODO: get API token from preferences
         request.addQueryParam("circle-token", token);
     }
 }

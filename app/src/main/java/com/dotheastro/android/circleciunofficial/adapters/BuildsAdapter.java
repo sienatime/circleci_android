@@ -4,11 +4,11 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import com.dotheastro.android.circleciunofficial.BR;
 import com.dotheastro.android.circleciunofficial.R;
@@ -26,11 +26,13 @@ import org.ocpsoft.prettytime.PrettyTime;
 public class BuildsAdapter extends RecyclerView.Adapter<BuildsAdapter.ViewHolder> {
 
   final static PrettyTime prettyTime = new PrettyTime();
+  private Context context;
   private Resources res;
   private String packageName;
   private Build[] builds;
 
   public BuildsAdapter(Context context, Build[] builds) {
+    this.context = context;
     this.res = context.getResources();
     this.packageName = context.getPackageName();
     this.builds = builds;
@@ -38,6 +40,7 @@ public class BuildsAdapter extends RecyclerView.Adapter<BuildsAdapter.ViewHolder
 
   public void setBuilds(Build[] builds) {
     this.builds = builds;
+    notifyDataSetChanged();
   }
 
   @Override public void onBindViewHolder(ViewHolder viewHolder, int position) {
@@ -68,9 +71,9 @@ public class BuildsAdapter extends RecyclerView.Adapter<BuildsAdapter.ViewHolder
     int statusColorId = res.getIdentifier(build.status, "color", packageName);
 
     if (statusColorId != 0) {
-      viewHolder.status.setBackgroundColor(res.getColor(statusColorId));
+      viewHolder.status.setBackgroundColor(ContextCompat.getColor(context, statusColorId));
     } else {
-      viewHolder.status.setBackgroundColor(res.getColor(R.color.canceled));
+      viewHolder.status.setBackgroundColor(ContextCompat.getColor(context, R.color.canceled));
     }
   }
 
