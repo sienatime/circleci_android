@@ -4,6 +4,7 @@
     <string name="app_name">CircleCI Unofficial</string>
     <string name="get_started1">Welcome to CircleCI Unofficial!</string>
     <string name="get_started2">Get started by entering your Circle CI API token under Settings.</string>
+    <string name="open_circle_ci">Get Circle CI API Token</string>
     <string name="action_settings">Settings</string>
     <string name="retry">Retry</string>
     <string name="cancel">Cancel</string>

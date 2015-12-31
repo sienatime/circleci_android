@@ -13,7 +13,6 @@ public class Handlers {
   private Bus bus;
 
   public Handlers() {
-
   }
 
   private Bus getBus() {

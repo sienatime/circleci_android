@@ -2,6 +2,8 @@ package com.dotheastro.android.circleciunofficial.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -12,9 +14,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import com.dotheastro.android.circleciunofficial.BR;
 import com.dotheastro.android.circleciunofficial.R;
 import com.dotheastro.android.circleciunofficial.adapters.BuildsAdapter;
+import com.dotheastro.android.circleciunofficial.databinding.ActivityBuildsBinding;
 import com.dotheastro.android.circleciunofficial.models.Build;
+import com.dotheastro.android.circleciunofficial.models.Handlers;
 import com.dotheastro.android.circleciunofficial.models.bus.ApiErrorEvent;
 import com.dotheastro.android.circleciunofficial.models.bus.BuildsLoadedEvent;
 import com.dotheastro.android.circleciunofficial.models.bus.BusProvider;
@@ -32,7 +37,8 @@ public class BuildsActivity extends AppCompatActivity {
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_builds);
+    ActivityBuildsBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_builds);
+    binding.setVariable(BR.activity, this);
     setUpRecyclerView();
   }
 
@@ -51,11 +57,10 @@ public class BuildsActivity extends AppCompatActivity {
     super.onResume();
 
     if (tokenIsEmpty()) {
-      recyclerView.setVisibility(View.GONE);
+      adapter.clear();
       getStarted.setVisibility(View.VISIBLE);
     } else {
       getStarted.setVisibility(View.GONE);
-      recyclerView.setVisibility(View.VISIBLE);
       getBus().post(new LoadBuildsEvent());
     }
   }
@@ -67,7 +72,6 @@ public class BuildsActivity extends AppCompatActivity {
 
   @Subscribe public void updateViewWithBuilds(BuildsLoadedEvent event) {
     adapter.setBuilds(event.getBuilds());
-    adapter.notifyDataSetChanged();
   }
 
   @Subscribe public void onSuccessfulRetry(RetrySuccessfulEvent event) {
@@ -82,7 +86,7 @@ public class BuildsActivity extends AppCompatActivity {
 
   @Subscribe public void onApiError(ApiErrorEvent event) {
     getStarted.setVisibility(View.VISIBLE);
-    recyclerView.setVisibility(View.GONE);
+    adapter.clear();
   }
 
   public void setUpRecyclerView() {
@@ -120,5 +124,10 @@ public class BuildsActivity extends AppCompatActivity {
       bus = BusProvider.getInstance();
     }
     return bus;
+  }
+
+  public void openCircleAPITokenSettings(View view) {
+    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://circleci.com/account/api"));
+    startActivity(browserIntent);
   }
 }

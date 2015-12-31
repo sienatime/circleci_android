@@ -1,9 +1,14 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white"
-    tools:context="com.dotheastro.android.circleciunofficial.activities.BuildsActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+  <data>
+    <variable name="activity" type="com.dotheastro.android.circleciunofficial.activities.BuildsActivity" />
+  </data>
+
+  <RelativeLayout
+      xmlns:tools="http://schemas.android.com/tools"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@android:color/white"
+      tools:context="com.dotheastro.android.circleciunofficial.activities.BuildsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,26 +21,34 @@
         android:id="@+id/get_started"
         android:visibility="gone">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:textSize="24sp"
-            android:text="@string/get_started1" />
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingTop="@dimen/activity_vertical_margin"
+          android:paddingBottom="@dimen/activity_vertical_margin"
+          android:textSize="24sp"
+          android:text="@string/get_started1"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:text="@string/get_started2" />
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingTop="@dimen/activity_vertical_margin"
+          android:paddingBottom="@dimen/activity_vertical_margin"
+          android:text="@string/get_started2"/>
 
-        </LinearLayout>
+      <Button
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/open_circle_ci"
+          android:layout_gravity="center"
+          android:onClick="@{activity.openCircleAPITokenSettings}"/>
+
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/builds_list" />
+        android:id="@+id/builds_list"/>
 
-</RelativeLayout>
+  </RelativeLayout>
+</layout>

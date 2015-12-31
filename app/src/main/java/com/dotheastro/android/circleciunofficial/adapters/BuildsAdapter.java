@@ -43,6 +43,10 @@ public class BuildsAdapter extends RecyclerView.Adapter<BuildsAdapter.ViewHolder
     notifyDataSetChanged();
   }
 
+  public void clear() {
+    setBuilds(new Build[0]);
+  }
+
   @Override public void onBindViewHolder(ViewHolder viewHolder, int position) {
     Build build = builds[position];
     viewHolder.binding.setVariable(BR.build, build);
