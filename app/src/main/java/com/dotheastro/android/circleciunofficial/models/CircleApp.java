@@ -43,7 +43,7 @@ public class CircleApp extends Application {
             message = getString(R.string.unauthorized);
         }
 
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
         Log.e("CircleCIUnofficial", event.getMessage());
         Thread.dumpStack();
     }

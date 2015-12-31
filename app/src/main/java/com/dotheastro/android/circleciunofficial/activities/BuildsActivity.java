@@ -71,12 +71,12 @@ public class BuildsActivity extends AppCompatActivity {
   }
 
   @Subscribe public void onSuccessfulRetry(RetrySuccessfulEvent event) {
-    Toast.makeText(this, getString(R.string.retry_successful), Toast.LENGTH_LONG).show();
+    Toast.makeText(this, getString(R.string.retry_successful), Toast.LENGTH_SHORT).show();
     getBus().post(new LoadBuildsEvent());
   }
 
   @Subscribe public void onSuccessfulCancel(CancelBuildSuccessful event) {
-    Toast.makeText(this, getString(R.string.cancel_successful), Toast.LENGTH_LONG).show();
+    Toast.makeText(this, getString(R.string.cancel_successful), Toast.LENGTH_SHORT).show();
     getBus().post(new LoadBuildsEvent());
   }
 
