@@ -1,17 +1,17 @@
-package com.dotheastro.android.circleciunofficial.models;
+package net.emojiparty.android.circleciunofficial.models;
 
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
-import com.dotheastro.android.circleciunofficial.R;
-import com.dotheastro.android.circleciunofficial.interfaces.CircleAPI;
-import com.dotheastro.android.circleciunofficial.models.bus.ApiErrorEvent;
-import com.dotheastro.android.circleciunofficial.models.bus.BuildsLoadedEvent;
-import com.dotheastro.android.circleciunofficial.models.bus.CancelBuildEvent;
-import com.dotheastro.android.circleciunofficial.models.bus.CancelBuildSuccessful;
-import com.dotheastro.android.circleciunofficial.models.bus.LoadBuildsEvent;
-import com.dotheastro.android.circleciunofficial.models.bus.RetryBuildEvent;
-import com.dotheastro.android.circleciunofficial.models.bus.RetrySuccessfulEvent;
+import com.emojiparty.android.circleciunofficial.R;
+import net.emojiparty.android.circleciunofficial.interfaces.CircleAPI;
+import net.emojiparty.android.circleciunofficial.models.bus.ApiErrorEvent;
+import net.emojiparty.android.circleciunofficial.models.bus.BuildsLoadedEvent;
+import net.emojiparty.android.circleciunofficial.models.bus.CancelBuildEvent;
+import net.emojiparty.android.circleciunofficial.models.bus.CancelBuildSuccessful;
+import net.emojiparty.android.circleciunofficial.models.bus.LoadBuildsEvent;
+import net.emojiparty.android.circleciunofficial.models.bus.RetryBuildEvent;
+import net.emojiparty.android.circleciunofficial.models.bus.RetrySuccessfulEvent;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.otto.Bus;

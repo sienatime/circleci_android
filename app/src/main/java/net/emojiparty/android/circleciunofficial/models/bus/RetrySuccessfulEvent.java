@@ -1,6 +1,6 @@
-package com.dotheastro.android.circleciunofficial.models.bus;
+package net.emojiparty.android.circleciunofficial.models.bus;
 
-import com.dotheastro.android.circleciunofficial.models.Build;
+import net.emojiparty.android.circleciunofficial.models.Build;
 
 /**
  * Created by Siena on 10/11/2014.

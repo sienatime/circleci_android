@@ -1,4 +1,4 @@
-package com.dotheastro.android.circleciunofficial;
+package com.emojiparty.android.circleciunofficial;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

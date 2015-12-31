@@ -4,11 +4,11 @@
   <data>
     <variable
         name="build"
-        type="com.dotheastro.android.circleciunofficial.models.Build"/>
+        type="net.emojiparty.android.circleciunofficial.models.Build"/>
 
     <variable
         name="handlers"
-        type="com.dotheastro.android.circleciunofficial.models.Handlers"/>
+        type="net.emojiparty.android.circleciunofficial.models.Handlers"/>
 
     <import type="android.view.View"/>
   </data>

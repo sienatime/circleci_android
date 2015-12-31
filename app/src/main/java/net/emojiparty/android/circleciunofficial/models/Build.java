@@ -1,4 +1,4 @@
-package com.dotheastro.android.circleciunofficial.models;
+package net.emojiparty.android.circleciunofficial.models;
 
 import java.util.Date;
 

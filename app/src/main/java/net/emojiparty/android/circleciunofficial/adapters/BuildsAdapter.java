@@ -1,4 +1,4 @@
-package com.dotheastro.android.circleciunofficial.adapters;
+package net.emojiparty.android.circleciunofficial.adapters;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -10,10 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import com.dotheastro.android.circleciunofficial.BR;
-import com.dotheastro.android.circleciunofficial.R;
-import com.dotheastro.android.circleciunofficial.models.Build;
-import com.dotheastro.android.circleciunofficial.models.Handlers;
+import com.emojiparty.android.circleciunofficial.BR;
+import com.emojiparty.android.circleciunofficial.R;
+import net.emojiparty.android.circleciunofficial.models.Build;
+import net.emojiparty.android.circleciunofficial.models.Handlers;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;

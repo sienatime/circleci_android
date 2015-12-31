@@ -1,7 +1,7 @@
-package com.dotheastro.android.circleciunofficial.models.bus;
+package net.emojiparty.android.circleciunofficial.models.bus;
 
-import com.dotheastro.android.circleciunofficial.R;
-import com.dotheastro.android.circleciunofficial.models.CircleApp;
+import com.emojiparty.android.circleciunofficial.R;
+import net.emojiparty.android.circleciunofficial.models.CircleApp;
 
 import retrofit.RetrofitError;
 

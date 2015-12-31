@@ -1,14 +1,14 @@
-package com.dotheastro.android.circleciunofficial.models;
+package net.emojiparty.android.circleciunofficial.models;
 
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
-import com.dotheastro.android.circleciunofficial.R;
-import com.dotheastro.android.circleciunofficial.models.bus.ApiErrorEvent;
-import com.dotheastro.android.circleciunofficial.models.bus.ApiTokenChangedEvent;
-import com.dotheastro.android.circleciunofficial.models.bus.BusProvider;
+import com.emojiparty.android.circleciunofficial.R;
+import net.emojiparty.android.circleciunofficial.models.bus.ApiErrorEvent;
+import net.emojiparty.android.circleciunofficial.models.bus.ApiTokenChangedEvent;
+import net.emojiparty.android.circleciunofficial.models.bus.BusProvider;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 

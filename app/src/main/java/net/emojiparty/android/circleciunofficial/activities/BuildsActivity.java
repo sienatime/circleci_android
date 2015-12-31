@@ -1,4 +1,4 @@
-package com.dotheastro.android.circleciunofficial.activities;
+package net.emojiparty.android.circleciunofficial.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,18 +14,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-import com.dotheastro.android.circleciunofficial.BR;
-import com.dotheastro.android.circleciunofficial.R;
-import com.dotheastro.android.circleciunofficial.adapters.BuildsAdapter;
-import com.dotheastro.android.circleciunofficial.databinding.ActivityBuildsBinding;
-import com.dotheastro.android.circleciunofficial.models.Build;
-import com.dotheastro.android.circleciunofficial.models.Handlers;
-import com.dotheastro.android.circleciunofficial.models.bus.ApiErrorEvent;
-import com.dotheastro.android.circleciunofficial.models.bus.BuildsLoadedEvent;
-import com.dotheastro.android.circleciunofficial.models.bus.BusProvider;
-import com.dotheastro.android.circleciunofficial.models.bus.CancelBuildSuccessful;
-import com.dotheastro.android.circleciunofficial.models.bus.LoadBuildsEvent;
-import com.dotheastro.android.circleciunofficial.models.bus.RetrySuccessfulEvent;
+import com.emojiparty.android.circleciunofficial.BR;
+import com.emojiparty.android.circleciunofficial.R;
+import net.emojiparty.android.circleciunofficial.adapters.BuildsAdapter;
+import com.emojiparty.android.circleciunofficial.databinding.ActivityBuildsBinding;
+import net.emojiparty.android.circleciunofficial.models.Build;
+import net.emojiparty.android.circleciunofficial.models.bus.ApiErrorEvent;
+import net.emojiparty.android.circleciunofficial.models.bus.BuildsLoadedEvent;
+import net.emojiparty.android.circleciunofficial.models.bus.BusProvider;
+import net.emojiparty.android.circleciunofficial.models.bus.CancelBuildSuccessful;
+import net.emojiparty.android.circleciunofficial.models.bus.LoadBuildsEvent;
+import net.emojiparty.android.circleciunofficial.models.bus.RetrySuccessfulEvent;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 

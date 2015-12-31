@@ -1,9 +1,9 @@
-package com.dotheastro.android.circleciunofficial.models;
+package net.emojiparty.android.circleciunofficial.models;
 
 import android.view.View;
-import com.dotheastro.android.circleciunofficial.models.bus.BusProvider;
-import com.dotheastro.android.circleciunofficial.models.bus.CancelBuildEvent;
-import com.dotheastro.android.circleciunofficial.models.bus.RetryBuildEvent;
+import net.emojiparty.android.circleciunofficial.models.bus.BusProvider;
+import net.emojiparty.android.circleciunofficial.models.bus.CancelBuildEvent;
+import net.emojiparty.android.circleciunofficial.models.bus.RetryBuildEvent;
 import com.squareup.otto.Bus;
 
 /**

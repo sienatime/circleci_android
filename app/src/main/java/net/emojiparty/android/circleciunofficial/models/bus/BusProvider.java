@@ -1,4 +1,4 @@
-package com.dotheastro.android.circleciunofficial.models.bus;
+package net.emojiparty.android.circleciunofficial.models.bus;
 
 import com.squareup.otto.Bus;
 

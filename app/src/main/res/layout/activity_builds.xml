@@ -1,6 +1,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
   <data>
-    <variable name="activity" type="com.dotheastro.android.circleciunofficial.activities.BuildsActivity" />
+    <variable name="activity" type="net.emojiparty.android.circleciunofficial.activities.BuildsActivity" />
   </data>
 
   <RelativeLayout
@@ -8,7 +8,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:background="@color/background_gray"
-      tools:context="com.dotheastro.android.circleciunofficial.activities.BuildsActivity">
+      tools:context="net.emojiparty.android.circleciunofficial.activities.BuildsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

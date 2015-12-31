@@ -1,4 +1,4 @@
-package com.dotheastro.android.circleciunofficial.interfaces;
+package net.emojiparty.android.circleciunofficial.interfaces;
 
 import retrofit.Callback;
 import retrofit.http.GET;
