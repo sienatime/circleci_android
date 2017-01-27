@@ -1,5 +1,6 @@
 package net.emojiparty.android.circleciunofficial.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
@@ -9,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,8 +18,11 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.emojiparty.android.circleciunofficial.BR;
 import com.emojiparty.android.circleciunofficial.R;
-import net.emojiparty.android.circleciunofficial.adapters.BuildsAdapter;
 import com.emojiparty.android.circleciunofficial.databinding.ActivityBuildsBinding;
+import com.squareup.otto.Bus;
+import com.squareup.otto.Subscribe;
+import java.util.Date;
+import net.emojiparty.android.circleciunofficial.adapters.BuildsAdapter;
 import net.emojiparty.android.circleciunofficial.models.Build;
 import net.emojiparty.android.circleciunofficial.models.bus.ApiErrorEvent;
 import net.emojiparty.android.circleciunofficial.models.bus.BuildsLoadedEvent;
@@ -25,8 +30,6 @@ import net.emojiparty.android.circleciunofficial.models.bus.BusProvider;
 import net.emojiparty.android.circleciunofficial.models.bus.CancelBuildSuccessful;
 import net.emojiparty.android.circleciunofficial.models.bus.LoadBuildsEvent;
 import net.emojiparty.android.circleciunofficial.models.bus.RetrySuccessfulEvent;
-import com.squareup.otto.Bus;
-import com.squareup.otto.Subscribe;
 
 public class BuildsActivity extends AppCompatActivity {
   private BuildsAdapter adapter;
@@ -35,6 +38,12 @@ public class BuildsActivity extends AppCompatActivity {
   private RecyclerView recyclerView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
+    Context context = this.getApplicationContext();
+    java.text.DateFormat format = DateFormat.getDateFormat(context);
+    Date now = new Date();
+    format.format(now);
+
+
     super.onCreate(savedInstanceState);
     ActivityBuildsBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_builds);
     binding.setVariable(BR.activity, this);
